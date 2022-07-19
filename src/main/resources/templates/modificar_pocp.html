@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+</head>
+<body>
+	<h1>Hola! Modifique aqui el COV a trabajar</h1>
+
+
+	<form th:action="@{/pocp/modificarpocp/__${pocp.id}__}" method="POST"
+		enctype="multipart/form-data">
+		<input type="hidden" th:value="${pocp.id}" name="id">
+		<div class="mb-3">
+			<label class="form-label">Constante kOH</label> <input type="text"
+				class="form-control" id="exampleInputEmail1" name="constantekoh"
+				th:value="${constantekoh}">
+
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Peso Molecular (g/mol)</label> <input type="text"
+				class="form-control" id="exampleInputEmail1" name="pesoMolecular"
+				th:value="${pesoMolecular}">
+
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Numero de Enlaces del COV</label> <input
+				type="number" class="form-control" id="exampleInputPassword1"
+				name="numeroEnlaces" th:value="${numeroEnlaces}">
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Numero de Carbonos del COV</label> <input
+				type="number" class="form-control" id="exampleInputPassword1"
+				name="numeroCarbonos" th:value="${numeroCarbonos}">
+		</div>
+		<div>
+			<h3>Clase COV</h3>
+			<select th:name="clase_voc" th:value="${clase_voc}">
+				<option value="aliphatics">aliphatics</option>
+				<option value="aromatics with 0 alkyl substituents">aromatics
+					with 0 alkyl substituents</option>
+				<option value="aromatics with 1 alkyl substituents">aromatics
+					with 1 alkyl substituents</option>
+				<option value="aromatics with 1 alkyl substituents">aromatics
+					with 2 alkyl substituents</option>
+				<option value="aromatics with 1 alkyl substituents">aromatics
+					with 3 alkyl substituents</option>
+			</select>
+		</div>
+
+		<div>
+			<h3>Región</h3>
+			<select th:name="region" th:value="${region}">
+				<option value="europa">Europa</option>
+				<option value="usa">USA</option>
+			</select>
+		</div>
+		<h3>Datos necesarios para el calculo del parámetro F</h3>
+		<div class="mb-3">
+			<label class="form-label">Rendimiento del producto No
+				reactivo con radical OH</label> <input type="text" class="form-control"
+				id="exampleInputPassword1" name="rendimientoProductoNoReactivo"
+				th:value="${rendimientoProductoNoReactivo}">
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Constante kOH del producto No
+				reactivo</label> <input type="text" class="form-control"
+				id="exampleInputPassword1" name="constantekOhProductoNoReactivo"
+				th:value="${constantekOhProductoNoReactivo}">
+		</div>
+
+		<div class="mb-3">
+			<label class="form-label">Numero de enlaces de producto No
+				reactivo</label> <input type="number" class="form-control"
+				id="exampleInputPassword1" name="numeroEnlacesProducto"
+				th:value="${numeroEnlacesProducto}">
+		</div>
+		<h3>Datos necesarios para el calculo del parámetro P</h3>
+		<div>
+			<h3>Clase COV parámetro P</h3>
+			<select th:name="claseCov_p" th:value="${claseCov_p}">
+				<option value="aldehydes/ketones">aldehydes/ketones</option>
+				<option value="alpha-dicarbonyls">alpha-dicarbonyls</option>
+				<option value="cycloketones">cycloketones</option>
+				<option value="N/A">N/A</option>
+			</select>
+		</div>
+		<h3>Datos necesarios para el calculo del parámetro RO3</h3>
+		<div>
+			<h3>Clase COV parámetro RO3</h3>
+			<select th:name="covsConOzono" th:value="${covsConOzono}">
+				<option value="alkenes/unsaturated oxygenates">alkenes/unsaturated
+					oxygenates</option>
+				<option value="N/A">N/A</option>
+			</select>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Constante kO3</label> <input type="text"
+				class="form-control" id="exampleInputEmail1" name="constanteko3"
+				th:value="${constanteko3}">
+
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Rendimiento del COV con OH*</label> <input
+				type="number" class="form-control" id="exampleInputPassword1"
+				name="rendimientoCompuestoConOh"
+				th:value="${rendimientoCompuestoConOh}">
+		</div>
+
+		<div>
+			<h3>Clase COV parámetro Q</h3>
+			<select th:name="covAromatico" th:value="${covAromatico}">
+				<option value="benzaldehydes/styrenes">benzaldehydes/styrenes</option>
+				<option value="hydroxyarenes">hydroxyarenes</option>
+				<option value="N/A">N/A</option>
+			</select>
+		</div>
+
+
+		<button type="submit" class="btn btn-primary">Calcular POCP</button>
+	</form>
+
+
+	<div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+		<div class="card-body">
+			<h5 class="card-title">Exito</h5>
+			<p class="card-text" th:text="${exito}"></p>
+		</div>
+	</div>
+	<div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+		<div class="card-body">
+			<h5 class="card-title">Error</h5>
+			<p class="card-text" th:text="${error}"></p>
+		</div>
+	</div>
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+</body>
+</html>

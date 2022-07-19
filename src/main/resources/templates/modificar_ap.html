@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Hola! Modifique aqui el COV a trabajar</h1>
+    
+    
+    <form th:action="@{/ap/modificarap/__${ap.id}__}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" th:value="${ap.id}" name="id">
+                <div class="mb-3">
+                    <label class="form-label">Cloro</label>
+                    <input type="number" class="form-control" id="exampleInputEmail1" name="cloro" th:value="${cloro}">
+                    
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Fluor</label>
+                    <input type="number" class="form-control" id="exampleInputPassword1" name="fluor" th:value="${fluor}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nitrogeno</label>
+                    <input type="number" class="form-control" id="exampleInputPassword1" name="nitrogeno" th:value="${nitrogeno}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Azufre</label>
+                    <input type="number" class="form-control" id="exampleInputPassword1" name="azufre" th:value="${azufre}">
+                </div>
+               <div class="mb-3">
+                    <label class="form-label">Peso Molecular</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" name="pesoMolecular" th:value="${pesoMolecular}">
+                </div>
+                
+                
+                <button type="submit" class="btn btn-primary">Calcular AP</button>
+            </form>
+           
+            
+            <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Exito</h5>
+                    <p class="card-text" th:text="${exito}"></p>
+                </div>
+            </div>
+            <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

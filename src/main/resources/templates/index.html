@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Hola!</h1>
+    <div class="card text-center">
+  <div class="card-header">
+    Calcular Impactos Ambientales de un COV en la Atmosfera
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Impacto Atmosfericos</h5>
+    
+    <a th:href="@{compuesto/registrar}" class="btn btn-primary">Registrar COV</a>
+    <a th:href="@{pocp/registrar(id=)}" class="btn btn-primary">Calcular POCP</a>
+    <a th:href="@{ap/lista}" class="btn btn-primary">AP de COVs</a>
+    <a th:href="@{graph/display}" class="btn btn-primary">Grafica AP</a>
+  </div>
+  <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Exito</h5>
+                    <p class="card-text" th:text="${exito}"></p>
+                </div>
+            </div>
+            <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
